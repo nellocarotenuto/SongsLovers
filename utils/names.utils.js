@@ -3,7 +3,7 @@ const diacritics = require('./diacritics.utils');
 
 // Converts unicode chars to ASCII and returns a lowercase string
 function normalize(string) {
-    let normalized = diacritics.remove(string).replace(/[--‐‑⁃−,.'"]/g, '').trim().toLowerCase();
+    let normalized = diacritics.remove(string).replace(/[,.'"]/g, '').replace(/[-‐‑⁃−‒–—―]/g, '-').trim().toLowerCase();
 
     return normalized;
 }
