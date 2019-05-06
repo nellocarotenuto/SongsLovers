@@ -30,6 +30,10 @@ async function getAuthHeaders() {
 // Query the Spotify API for artists of a given name and return a simplified artist object
 async function searchArtists(name) {
 
+    if (!name) {
+        throw 'Artist name must be defined';
+    }
+
     // Get authorization headers
     let headers = await getAuthHeaders();
 
@@ -62,6 +66,10 @@ async function searchArtists(name) {
 // Query the Spotify API for the artist of a given id and return all the relevant data
 async function fetchArtist(id) {
 
+    if (!id) {
+        throw 'Artist ID must be defined';
+    }
+
     // Get authorization headers
     let headers = await getAuthHeaders();
 
@@ -84,6 +92,10 @@ async function fetchArtist(id) {
 
 // Query the Spotify API for the albums of a given artist and return all the relevant data
 async function fetchAlbums(artistId) {
+
+    if (!artistId) {
+        throw 'Artist ID must be defined';
+    }
 
     // Get authorization headers
     let headers = await getAuthHeaders();
@@ -125,6 +137,10 @@ async function fetchAlbums(artistId) {
 
 // Query the Spotify API for the tracks of a given album and return all the relevant data
 async function fetchTracks(albumId) {
+
+    if (!albumId) {
+        throw 'Album id must be defined';
+    }
 
     // Get authorization headers
     let headers = await getAuthHeaders();

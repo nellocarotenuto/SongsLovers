@@ -31,7 +31,7 @@ async function searchArtist(artistName) {
     };
 
     try {
-        let response = await axios.post(`http://www.vivoconcerti.com/views/ajax`, qs.stringify(data), {headers: headers});
+        let response = await axios.post(`http://www.vivoconcerti.com/views/ajax`, qs.stringify(data), {headers : headers});
         let html;
 
         for (let item of response.data) {
@@ -62,6 +62,10 @@ async function searchArtist(artistName) {
 
 // Query the Vivo Concerti website with an artist name to get the list of concerts
 async function getArtistConcerts(artistName) {
+
+    if (!artistName) {
+        throw 'Artist name must be defined';
+    }
 
     let artistPage = await searchArtist(artistName);
 
