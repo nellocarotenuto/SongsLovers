@@ -37,6 +37,7 @@ async function searchArtist(artistName) {
     }
 }
 
+
 // Query the Live Nation website with an artist name to get the list of concerts
 async function getArtistConcerts(artistName) {
 
@@ -47,7 +48,7 @@ async function getArtistConcerts(artistName) {
     let artistPage = await searchArtist(artistName);
 
     if (!artistPage) {
-        logger.silly(`No artist page found on Vivo Concerti for ${artistName}`);
+        logger.silly(`No artist page found on Live Nation for ${artistName}`);
         return undefined;
     }
 
@@ -87,7 +88,7 @@ async function getArtistConcerts(artistName) {
 
         return concerts;
     } catch (err) {
-        logger.error(`Error occurred scraping Vivo Concerti website - ${err}`);
+        logger.error(`Error occurred scraping Live Nation website - ${err}`);
     }
 
 }
