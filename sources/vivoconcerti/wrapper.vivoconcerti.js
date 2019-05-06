@@ -13,8 +13,6 @@ module.exports.getArtistConcerts = getArtistConcerts;
 // Query the Vivo Concerti search API with the name of the artist to get its profile page
 async function searchArtist(artistName) {
 
-    let normalizedArtistName = namesUtils.normalize(artistName);
-
     // Define request headers
     let headers = {
         'Content-Type' : 'application/x-www-form-urlencoded',
