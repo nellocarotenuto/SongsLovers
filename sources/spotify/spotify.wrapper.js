@@ -3,7 +3,7 @@ const logger = require('../../config/logger');
 const axios = require('axios');
 const qs = require('qs');
 
-const spotify = require('./auth.spotify');
+const spotify = require('./spotify.auth');
 
 // Export module functions
 module.exports.searchArtists = searchArtists;
