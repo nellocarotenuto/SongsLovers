@@ -23,11 +23,4 @@ module.exports.connect = () => {
     mongoose.connection.on('disconnected', () => {
         logger.warn(`Closed connection to MongoDB`);
     });
-
-    process.on('SIGINT', () => {
-        mongoose.connection.close(() => {
-            logger.warn(`Closed connection to MongoDB due to application termination`);
-            process.exit(0)
-        });
-    });
 };
