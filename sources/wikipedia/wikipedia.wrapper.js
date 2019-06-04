@@ -48,7 +48,7 @@ async function getArtistPage(artistName) {
     }
 
     try {
-        let results = [];
+        let result;
 
         let params = {
             'action' : 'query',
@@ -68,23 +68,23 @@ async function getArtistPage(artistName) {
 
             if (page.templates) {
                 if (namesUtils.normalize(page.title).includes(namesUtils.normalize(artistName))) {
-                    results.push({
+                    result = {
                         artist : artistName,
                         description : page.extract,
                         link : page.fullurl
-                    });
+                    };
 
                     break;
                 }
             }
         }
 
-        if (!results) {
+        if (!result) {
             logger.silly(`No artist page found on Wikipedia for ${artistName}`);
             return undefined;
         }
 
-        return results;
+        return result;
     } catch (err) {
         logger.error(`Error occurred querying Wikipedia API - ${err}`);
     }
