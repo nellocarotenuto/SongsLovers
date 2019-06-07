@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Artist = new Schema({
+    id : String,
     name : {type : String, required : true},
     picture : String,
     bio : String,
     genres : [String],
-    spotifyId : {type : String, required : true},
     twitter : String,
     facebook : String,
     instagram : String,

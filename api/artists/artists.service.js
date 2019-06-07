@@ -11,44 +11,58 @@ const VALIDITY = 1000 * 60 * 60 * 24 * 30;
 
 // Export module functions
 module.exports.getArtist = getArtist;
+module.exports.getSimplifiedArtist = getSimplifiedArtist;
 
-async function getArtist(spotifyId) {
+async function getArtist(id) {
     try {
-        let artist = await manager.getArtistFromCache(spotifyId);
+        let artist = await manager.getArtistFromCache(id);
 
         if (!artist) {
-            logger.verbose(`Artist ${spotifyId} is not in cache`);
-            artist = await fetchArtist(spotifyId);
+            logger.verbose(`Artist ${id} is not in cache`);
+            artist = await fetchArtist(id);
 
             await manager.saveArtistToCache(artist);
-            logger.verbose(`Artist ${spotifyId} has been saved to cache`);
+            logger.verbose(`Artist ${id} has been saved to cache`);
         } else if (artist.updated < Date.now() - VALIDITY) {
-            logger.verbose(`Artist ${spotifyId} is in cache but not up to date`);
-            artist = await fetchArtist(spotifyId);
+            logger.verbose(`Artist ${id} is in cache but not up to date`);
+            artist = await fetchArtist(id);
 
             await manager.updateArtistInCache(artist);
-            logger.verbose(`Artist ${spotifyId} has been updated in cache`);
+            logger.verbose(`Artist ${id} has been updated in cache`);
         }
 
         return artist;
     } catch (err) {
-        logger.error(`Error occurred getting the artist ${spotifyId} - ${err}`);
+        logger.error(`Error occurred getting the artist ${id} - ${err}`);
     }
 }
 
-async function fetchArtist(spotifyId) {
+async function getSimplifiedArtist(id) {
     try {
-        let spotifyInfo = await spotify.fetchArtist(spotifyId);
+        let artist = await getArtist(id);
+
+        return {
+            _id : artist._id,
+            name : artist.name
+        }
+    } catch (err) {
+        logger.error(`Error occurred getting the simplified artist ${id} - ${err}`);
+    }
+}
+
+async function fetchArtist(id) {
+    try {
+        let spotifyInfo = await spotify.fetchArtist(id);
 
         [geniusInfo, wikipediaInfo] = await Promise.all([genius.getArtistSocialInfo(spotifyInfo.name),
                                                                 wikipedia.getArtistPage(spotifyInfo.name)]);
 
         return {
+            id : id,
             name : spotifyInfo.name,
             picture : spotifyInfo.picture,
             bio : wikipediaInfo.description,
             genres : spotifyInfo.genres,
-            spotifyId : spotifyInfo.id,
             twitter : geniusInfo.twitter,
             facebook : geniusInfo.facebook,
             instagram : geniusInfo.instagram,
@@ -56,6 +70,6 @@ async function fetchArtist(spotifyId) {
             updated : Date.now()
         }
     } catch (err) {
-        logger.error(`Error occurred while fetching updated info about the artist ${spotifyId} - ${err}`);
+        logger.error(`Error occurred while fetching updated info about the artist ${id} - ${err}`);
     }
 }

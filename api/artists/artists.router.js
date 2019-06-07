@@ -2,11 +2,16 @@
 const express = require('express');
 const router = express.Router();
 
-const service = require('./artists.service');
+const artistsService = require('./artists.service');
+const albumsService = require('../albums/albums.service');
 
 // Export module functions
 module.exports = router;
 
-router.get('/:spotifyId', async function(req, res, next) {
-    res.send(await service.getArtist(req.params.spotifyId));
+router.get('/:id', async function(req, res, next) {
+    res.send(await artistsService.getArtist(req.params.id));
+});
+
+router.get('/:id/albums', async function(req, res, next) {
+    res.send(await albumsService.getArtistAlbums(req.params.id));
 });
