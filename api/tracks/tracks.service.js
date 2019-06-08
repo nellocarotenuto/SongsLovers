@@ -24,6 +24,7 @@ async function getTrack(id) {
         } else if (track.updated < Date.now() - VALIDITY) {
             logger.verbose(`Track ${id} is in cache but not up to date`);
             track = await fetchTrack(id);
+            track.updated(new Date(Date.now()));
 
             await manager.updateTrackInCache(track);
             logger.verbose(`Track ${id} has been updated in cache`);
