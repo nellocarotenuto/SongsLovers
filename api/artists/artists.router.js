@@ -4,6 +4,7 @@ const router = express.Router();
 
 const artistsService = require('./artists.service');
 const albumsService = require('../albums/albums.service');
+const newsService = require('../news/news.service');
 
 // Export module functions
 module.exports = router;
@@ -26,4 +27,8 @@ router.get('/:id/albums', async function(req, res, next) {
     } else {
         res.send(albums);
     }
+});
+
+router.get('/:id/news', async function(req, res, next) {
+    res.send(await newsService.getNews(req.params.id));
 });
