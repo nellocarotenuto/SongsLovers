@@ -9,9 +9,21 @@ const albumsService = require('../albums/albums.service');
 module.exports = router;
 
 router.get('/:id', async function(req, res, next) {
-    res.send(await artistsService.getArtist(req.params.id));
+    let artist = await artistsService.getArtist(req.params.id);
+
+    if (!artist) {
+        res.status(404).send(`Not found`);
+    } else {
+        res.send(artist);
+    }
 });
 
 router.get('/:id/albums', async function(req, res, next) {
-    res.send(await albumsService.getArtistAlbums(req.params.id));
+    let albums = await albumsService.getArtistAlbums(req.params.id);
+
+    if (!albums) {
+        res.status(404).send(`Not found`);
+    } else {
+        res.send(albums);
+    }
 });

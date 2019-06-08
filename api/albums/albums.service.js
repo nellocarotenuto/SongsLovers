@@ -19,6 +19,10 @@ async function getAlbum(id) {
             logger.verbose(`Album ${id} is not in cache`);
             album = await spotify.fetchAlbum(id);
 
+            if (!album) {
+                return undefined;
+            }
+
             await manager.saveAlbumToCache(album);
             logger.verbose(`Album ${id} has been saved to cache`);
         } else if (album.updated < Date.now() - VALIDITY) {

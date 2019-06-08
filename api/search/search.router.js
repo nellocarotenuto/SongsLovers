@@ -8,5 +8,11 @@ const searchService = require('./search.service');
 module.exports = router;
 
 router.get('/', async function(req, res, next) {
-    res.send(await searchService.getResults(req.query.s));
+    let query = req.query.s;
+
+    if (!query) {
+        res.status(400).send(`Bad request`);
+    } else {
+        res.send(await searchService.getResults(query));
+    }
 });

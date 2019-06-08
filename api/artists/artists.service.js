@@ -11,7 +11,6 @@ const VALIDITY = 1000 * 60 * 60 * 24 * 30;
 
 // Export module functions
 module.exports.getArtist = getArtist;
-module.exports.getSimplifiedArtist = getSimplifiedArtist;
 
 async function getArtist(id) {
     try {
@@ -21,11 +20,16 @@ async function getArtist(id) {
             logger.verbose(`Artist ${id} is not in cache`);
             artist = await fetchArtist(id);
 
+            if (!artist) {
+                return undefined;
+            }
+
             await manager.saveArtistToCache(artist);
             logger.verbose(`Artist ${id} has been saved to cache`);
         } else if (artist.updated < Date.now() - VALIDITY) {
             logger.verbose(`Artist ${id} is in cache but not up to date`);
             artist = await fetchArtist(id);
+            artist.updated = new Date(Date.now());
 
             await manager.updateArtistInCache(artist);
             logger.verbose(`Artist ${id} has been updated in cache`);
@@ -37,22 +41,13 @@ async function getArtist(id) {
     }
 }
 
-async function getSimplifiedArtist(id) {
-    try {
-        let artist = await getArtist(id);
-
-        return {
-            _id : artist._id,
-            name : artist.name
-        }
-    } catch (err) {
-        logger.error(`Error occurred getting the simplified artist ${id} - ${err}`);
-    }
-}
-
 async function fetchArtist(id) {
     try {
         let spotifyInfo = await spotify.fetchArtist(id);
+
+        if (!spotifyInfo) {
+            return undefined;
+        }
 
         [geniusInfo, wikipediaInfo] = await Promise.all([genius.getArtistSocialInfo(spotifyInfo.name),
                                                                 wikipedia.getArtistPage(spotifyInfo.name)]);
@@ -61,12 +56,12 @@ async function fetchArtist(id) {
             id : id,
             name : spotifyInfo.name,
             picture : spotifyInfo.picture,
-            bio : wikipediaInfo.description,
+            bio : wikipediaInfo ? wikipediaInfo.description : undefined,
             genres : spotifyInfo.genres,
-            twitter : geniusInfo.twitter,
-            facebook : geniusInfo.facebook,
-            instagram : geniusInfo.instagram,
-            wikipedia : wikipediaInfo.link,
+            twitter : geniusInfo ? geniusInfo.twitter : undefined,
+            facebook : geniusInfo ? geniusInfo.facebook : undefined,
+            instagram : geniusInfo ? geniusInfo.instagram : undefined,
+            wikipedia : wikipediaInfo ? wikipediaInfo.link : undefined,
             updated : Date.now()
         }
     } catch (err) {
