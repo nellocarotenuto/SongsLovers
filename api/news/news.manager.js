@@ -6,15 +6,15 @@ const News = require('./news.model');
 // Export module functions
 module.exports.getNewsFromCache = getNewsFromCache;
 module.exports.saveNewsToCache = saveNewsToCache;
-module.exports.deleteNewsInCache = deleteNewsInCache;
+module.exports.updateNewsInCache = updateNewsInCache;
 
 async function getNewsFromCache(artist) {
     try {
         return await News.findOne({
-            artist:
+            artist :
                 {
-                    id: artist.id,
-                    name: artist.name
+                    id : artist.id,
+                    name : artist.name
                 }
         }, '-_id -__v');
     } catch(err) {
@@ -30,16 +30,14 @@ async function saveNewsToCache(news) {
     }
 }
 
-async function deleteNewsInCache(artist) {
+async function updateNewsInCache(news) {
     try {
-        await News.deleteOne({
-            artist:
-                {
-                    id: artist.id,
-                    name: artist.name
-                }
-        });
+        let result = await News.updateOne({artist : news.artist}, news);
+
+        if (result.nModified !== 1) {
+            logger.warn(`Something went wrong when updating the news for artist ${news.artist.id} in cache`);
+        }
     } catch(err) {
-        logger.error(`Error occurred while deleting the news for artist ${id} from cache - ${err}`)
+        logger.error(`Error occurred while updating the news for artist ${id} from cache - ${err}`)
     }
 }

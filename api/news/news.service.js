@@ -35,9 +35,7 @@ async function getNews(id) {
             logger.verbose(`News for artist ${id} is in cache but not up to date`);
             news = await fetchNews(artist);
 
-            await manager.deleteNewsInCache(artist);
-
-            await manager.saveNewsToCache(news);
+            await manager.updateNewsInCache(news);
             logger.verbose(`News for artist ${id} has been updated in cache`);
         }
 
