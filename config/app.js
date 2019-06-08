@@ -5,9 +5,11 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const logger = require('./logger');
 
+const homeRouter = require('../api/index');
 const artistsRouter = require('../api/artists/artists.router');
 const albumsRouter = require('../api/albums/albums.router');
 const tracksRouter = require('../api/tracks/tracks.router');
+const searchRouter = require('../api/search/search.router');
 
 const app = express();
 
@@ -22,5 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/artist', artistsRouter);
 app.use('/api/album', albumsRouter);
 app.use('/api/track', tracksRouter);
+app.use('/api/search', searchRouter);
+app.use('/', homeRouter);
 
 module.exports = app;
