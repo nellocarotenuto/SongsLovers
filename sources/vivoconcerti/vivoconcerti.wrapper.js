@@ -69,7 +69,7 @@ async function getArtistConcerts(artistName) {
 
     if (!artistPage) {
         logger.silly(`No artist page found on Vivo Concerti for ${artistName}`);
-        return undefined;
+        return [];
     }
 
     try {

@@ -49,7 +49,7 @@ async function getArtistConcerts(artistName) {
 
     if (!artistPage) {
         logger.silly(`No artist page found on Live Nation for ${artistName}`);
-        return undefined;
+        return [];
     }
 
     try {
