@@ -65,7 +65,7 @@ async function searchNews(artistName) {
             let month = parseInt(date.substring(3,5)) - 1;
             let year = 2000 + parseInt(date.substring(6));
 
-            date = new Date(year, month, day, 0, 0);
+            date = new Date(Date.UTC(year, month, day,  - 2, 0));
 
             news.push({
                 artist : artistName,

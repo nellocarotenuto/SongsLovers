@@ -81,11 +81,14 @@ async function getArtistConcerts(artistName) {
 
         rows.each((i, element) => {
             let date = $(element).find('span.date-display-single').attr('content');
+            let year = date.substring(0,4);
+            let month = date.substring(5,7) - 1;
+            let day = date.substring(8,10);
             let place = $(element).find('div.calenderPlaceAndTime.bit-location').find('div.venueAndCity').text().trim().replace(/\s\s+/g, ' ');
 
             concerts.push({
                 artist : artistName,
-                date : date,
+                date : new Date(Date.UTC(year, month, day, - 2, 0)),
                 place : place
             })
         });

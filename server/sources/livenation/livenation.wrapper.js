@@ -1,7 +1,6 @@
 // Module dependencies
 const logger = require('../../config/logger');
 const axios = require('axios');
-const qs = require('qs');
 const $ = require('cheerio');
 
 const namesUtils = require('../../utils/names.utils');
@@ -64,17 +63,8 @@ async function getArtistConcerts(artistName) {
             let month = $(element).find('div.artistticket__date > span.date__month').text().trim().substring(0, 3);
             let year = $(element).find('div.artistticket__date > span.date__month').text().trim().substring(4);
 
-            let time = $(element).find('div.artistticket__date > span.date__time');
 
-            let hours = 0;
-            let mins = 0;
-
-            if (time.length !== 0) {
-                hours = $(time).text().trim().substring(0, 2);
-                mins = $(time).text().trim().substring(3);
-            }
-
-            let date = new Date(Date.UTC(year, datesUtils.months[month.toLowerCase()], day, hours - 2, mins));
+            let date = new Date(Date.UTC(year, datesUtils.months[month.toLowerCase()], day,  - 2, 0));
 
             let venue = $(element).find('h4.artistticket__venue').text().trim();
             let city = $(element).find('h5.artistticket__city').text().trim();

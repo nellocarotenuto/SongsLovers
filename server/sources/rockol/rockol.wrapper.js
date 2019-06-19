@@ -96,7 +96,7 @@ async function getArtistNews(artistName) {
                 artist : artistName,
                 title : title,
                 excerpt : excerpt,
-                date : date,
+                date : new Date(date),
                 picture : picture,
                 link : link
             })

@@ -1,9 +1,6 @@
 // Module dependencies
 const logger = require('../../config/logger');
 const axios = require('axios');
-const qs = require('qs');
-
-const namesUtils = require('../../utils/names.utils');
 
 
 // Export module functions
@@ -41,7 +38,7 @@ async function getArtistConcertsAndTickets(artistName) {
         for (let item of events) {
             concerts.push({
                 artist : artistName,
-                date : item.Date,
+                date : new Date(item.Date),
                 place : item.Location,
                 link : `https://www.ticketmaster.it/event/${item.Slug}/${item.EventWebId}`,
                 price : item.PriceFrom !== 0 ? item.PriceFrom : undefined

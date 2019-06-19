@@ -153,10 +153,8 @@ async function getEventConcerts(artistName, eventUrl) {
                 let day = dateString.substring(5, 7);
                 let month = dateString.substring(8, 10) - 1;
                 let year = 2000 + parseInt(dateString.substring(11, 13));
-                let hours = dateString.substring(13, 15) - 2;
-                let mins = dateString.substring(16, 18);
 
-                let date = new Date(Date.UTC(year, month, day, hours, mins));
+                let date = new Date(Date.UTC(year, month, day, - 2, 0));
                 let place = `${venue} - ${city}`;
 
                 let price = 0;
