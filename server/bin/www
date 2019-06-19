@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Dotenv dependency and initialization
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config({path : 'server/.env'});
 
 // Module dependencies.
 const logger = require('../config/logger');
