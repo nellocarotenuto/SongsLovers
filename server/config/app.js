@@ -20,9 +20,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Define routes
+app.use(express.static(path.join(__dirname, '../../client/webapp/dist/')));
+
 app.use('/api/artist', artistsRouter);
 app.use('/api/album', albumsRouter);
 app.use('/api/track', tracksRouter);
 app.use('/api/search', searchRouter);
+
+app.use('/', (req, res) => {
+   res.sendFile(path.join(__dirname, '../../client/webapp/dist/', 'index.html'));
+});
 
 module.exports = app;
