@@ -5,6 +5,7 @@ const router = express.Router();
 const artistsService = require('./artists.service');
 const albumsService = require('../albums/albums.service');
 const newsService = require('../news/news.service');
+const concertService = require('../concerts/concerts.service');
 
 // Export module functions
 module.exports = router;
@@ -31,4 +32,8 @@ router.get('/:id/albums', async function(req, res, next) {
 
 router.get('/:id/news', async function(req, res, next) {
     res.send(await newsService.getNews(req.params.id));
+});
+
+router.get('/:id/concerts', async function(req, res, next) {
+    res.send(await concertService.getConcert(req.params.id));
 });
