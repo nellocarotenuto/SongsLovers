@@ -10,7 +10,7 @@ module.exports.updateSearchResultsInCache = updateSearchResultsInCache;
 
 async function getSearchResultsFromCache(query) {
     try {
-        return await SearchResults.findOne({query : query}, '-_id -__v').lean();
+        return await SearchResults.findOne({query : query}, { _id: 0, __v: 0, 'artists._id': 0});
     } catch(err) {
         logger.error(`Error occurred while getting search results for "${query}" from cache - ${err}`);
     }

@@ -10,7 +10,7 @@ module.exports.updateTrackInCache = updateTrackInCache;
 
 async function getTrackFromCache(id) {
     try {
-        return await Track.findOne({id : id}, '-_id -__v').lean();
+        return await Track.findOne({id : id}, {_id: 0, __v: 0, 'artists._id': 0, 'album.artists._id': 0});
     } catch(err) {
         logger.error(`Error occurred while getting the track ${id} from cache - ${err}`);
     }

@@ -16,7 +16,7 @@ async function getNewsFromCache(artist) {
                     id : artist.id,
                     name : artist.name
                 }
-        }, '-_id -__v');
+        }, { _id: 0, __v: 0, 'news._id': 0});
     } catch(err) {
         logger.error(`Error occurred while getting the news for artist ${artist.id} from cache - ${err}`);
     }
