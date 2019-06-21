@@ -6,26 +6,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule} from "@angular/material";
+import { AlbumsModule } from "./albums/albums.module";
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatSidenavModule } from "@angular/material";
 
 @NgModule({
-  declarations: [
+  declarations : [
     AppComponent,
   ],
-  imports: [
+  imports : [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AlbumsModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatDividerModule,
     MatButtonModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers : [],
+  bootstrap : [AppComponent]
 })
 
 export class AppModule { }

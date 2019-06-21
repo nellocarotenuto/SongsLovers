@@ -1,0 +1,46 @@
+<div class="album-container mat-elevation-z2" *ngIf="album">
+
+  <div class="album-details">
+
+    <div class="cover-container">
+      <img src="{{album.cover}}" alt="{{album.name}} cover" />
+    </div>
+
+    <div class="details-container">
+      <h1 class="mat-display-1 name">{{album.name}}</h1>
+      <h4 class="mat-h4 year">
+        <span>{{album.date | date : 'yyyy'}}</span>
+        <a href="{{album.spotify}}" title="Ascolta su Spotify" target="_blank" class="spotify">
+          <mat-icon aria-hidden="false" aria-label="Play on Spotify">play_circle_outline</mat-icon>
+        </a>
+      </h4>
+      <h3 class="mat-h3 artists">
+        <span *ngFor="let artist of album.artists">
+          <a [routerLink]="['/artist/', artist.id]" [title]="'Pagina artista per ' + artist.name">{{artist.name}}</a>
+        </span>
+      </h3>
+    </div>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-nav-list>
+
+    <a mat-list-item *ngFor="let track of album.tracks" routerLink="/track/{{track.id}}">
+
+      <mat-icon mat-list-icon aria-hidden="false" aria-label="Music note">music_note</mat-icon>
+      <h4 matLine>{{track.name}}</h4>
+      <p matLine class="artists">
+        <ng-container *ngFor="let artist of track.artists; index as i">
+          <span *ngIf="i == 0">{{artist.name}}</span><span *ngIf="i != 0"> • {{artist.name}}</span>
+        </ng-container>
+      </p>
+      <p class="duration"><span>{{track.duration | date : 'mm:ss'}}</span></p>
+      <mat-icon aria-hidden="false" aria-label="Play">play_arrow</mat-icon>
+
+    </a>
+
+  </mat-nav-list>
+
+</div>

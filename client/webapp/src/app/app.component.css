@@ -3,13 +3,24 @@ mat-toolbar {
   align-items: center;
 }
 
-mat-toolbar div.logo {
+mat-toolbar a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+mat-toolbar a.logo {
   display: flex;
   align-items: center;
 }
 
-mat-toolbar div.logo > img {
+mat-toolbar a.logo > img {
   width: 56px;
   height: 56px;
   margin-right: 10px;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: 40px;
 }

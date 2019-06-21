@@ -1,12 +1,12 @@
-<mat-toolbar color="primary">
-  <div class="logo">
-    <img src="assets/img/SongsLovers.png" alt="SongsLovers logo"/>
-    <a>SongsLovers</a>
-  </div>
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <a class="logo" routerLink="/">
+      <img src="assets/img/SongsLovers.png" alt="SongsLovers logo"/>
+      <span>SongsLovers</span>
+    </a>
+  </mat-toolbar-row>
 </mat-toolbar>
 
 <main>
-
+  <router-outlet></router-outlet>
 </main>
-
-<router-outlet></router-outlet>
