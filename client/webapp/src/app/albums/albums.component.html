@@ -1,4 +1,10 @@
-<div class="album-container mat-elevation-z2" *ngIf="album">
+<mat-spinner *ngIf="status == 'loading'"></mat-spinner>
+
+<h1 *ngIf="status == 'not-found'" class="mat-h1 message">Album non trovato</h1>
+
+<h1 *ngIf="status == 'error'" class="mat-h1 message">Qualcosa è andato storto</h1>
+
+<div class="album-container mat-elevation-z2" *ngIf="status == 'loaded'">
 
   <div class="album-details">
 

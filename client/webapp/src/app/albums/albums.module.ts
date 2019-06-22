@@ -4,7 +4,14 @@ import { CommonModule } from '@angular/common';
 import { AlbumsComponent } from './albums.component';
 import { AlbumsRouting } from "./albums.routing";
 
-import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatListModule} from "@angular/material";
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDividerModule,
+  MatIconModule,
+  MatListModule,
+  MatProgressSpinnerModule
+} from "@angular/material";
 
 @NgModule({
   imports: [
@@ -14,7 +21,8 @@ import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatList
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   declarations : [
     AlbumsComponent
@@ -23,5 +31,4 @@ import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatList
     AlbumsComponent
   ]
 })
-
 export class AlbumsModule { }

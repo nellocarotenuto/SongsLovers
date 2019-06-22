@@ -1,3 +1,12 @@
+mat-spinner {
+  margin: 20px auto;
+}
+
+h1.message {
+  text-align: center;
+  margin: 20px auto;
+}
+
 div.album-container {
   background: #ffffff;
   display: flex;
