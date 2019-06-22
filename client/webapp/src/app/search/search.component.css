@@ -1,0 +1,50 @@
+div.search-container {
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+div.search-container form {
+  width: 100%;
+}
+
+div.search-container form div.bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+div.search-container form input[type='text'] {
+  background: #ffffff;
+  padding: 16px 24px;
+  border-radius: 30px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  border: 0;
+  flex-grow: 1;
+}
+
+div.search-container form button {
+  margin-left: 20px;
+}
+
+div.results {
+  background: #ffffff;
+}
+
+div.results > h3 {
+  padding: 16px;
+  text-align: center;
+}
+
+div.results > mat-nav-list {
+  padding: 0;
+}
+
+div.results a.mat-list-item {
+  height: 88px;
+}
+
+div.results img.mat-list-icon {
+  width: 56px;
+  height: 56px;
+}

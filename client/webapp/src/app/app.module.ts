@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AlbumsModule } from "./albums/albums.module";
+import { SearchModule } from './search/search.module';
 import { TracksModule } from "./tracks/tracks.module";
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -28,7 +29,8 @@ import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatSid
     MatSidenavModule,
     MatListModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    SearchModule
   ],
   providers : [],
   bootstrap : [AppComponent]

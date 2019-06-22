@@ -1,0 +1,27 @@
+<div class="search-container">
+
+  <form>
+    <div class="bar">
+      <input type="text" name="query" [(ngModel)]="query" placeholder="Cerca artista..." class="mat-elevation-z6" >
+
+      <button mat-fab aria-label="Search button" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </form>
+
+</div>
+
+<div class="mat-elevation-z2 results" *ngIf="results">
+  <h3 *ngIf="results.length == 0" class="mat-h3">La ricerca non ha prodotto risultati</h3>
+
+  <mat-nav-list>
+
+    <a mat-list-item *ngFor="let artist of results" routerLink="/track/{{artist.id}}">
+      <img mat-list-icon src="{{artist.picture || 'assets/img/placeholder.png'}}" alt="{{artist.name}}" />
+      <h3 matLine>{{artist.name}}</h3>
+      <mat-icon aria-hidden="false" aria-label="Play">play_arrow</mat-icon>
+    </a>
+  </mat-nav-list>
+</div>
+
