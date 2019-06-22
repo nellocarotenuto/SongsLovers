@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchService} from "./search.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-search',
@@ -11,9 +12,13 @@ export class SearchComponent implements OnInit {
   query;
   results;
 
-  constructor(private searchService : SearchService) { }
+  constructor(
+    private searchService : SearchService,
+    private titleService : Title
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('SongsLovers');
   }
 
   search() {
