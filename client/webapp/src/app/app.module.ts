@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AlbumsModule } from "./albums/albums.module";
+import { TracksModule } from "./tracks/tracks.module";
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatSidenavModule } from "@angular/material";
@@ -21,6 +22,7 @@ import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatSid
     AppRoutingModule,
     BrowserAnimationsModule,
     AlbumsModule,
+    TracksModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,

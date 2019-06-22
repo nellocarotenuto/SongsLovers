@@ -1,0 +1,52 @@
+<mat-spinner *ngIf="status == 'loading'"></mat-spinner>
+
+<h1 *ngIf="status == 'not-found'" class="mat-h1 message">Traccia non trovata</h1>
+
+<h1 *ngIf="status == 'error'" class="mat-h1 message">Qualcosa è andato storto</h1>
+
+<div class="track-container mat-elevation-z2" *ngIf="status == 'loaded'">
+
+  <div class="track-details">
+
+    <div class="cover-container">
+      <img src="{{track.album.cover}}" alt="{{track.album.name}} cover" />
+    </div>
+
+    <div class="details-container">
+      <h1 class="mat-display-1 name">{{track.name}}</h1>
+      <h4 class="mat-h4 artists">
+        <ng-container *ngFor="let artist of track.artists; index as i">
+          <span *ngIf="i == 0">
+            <a [routerLink]="['/artist/', artist.id]" [title]="'Pagina artista per ' + artist.name">{{artist.name}}</a>
+          </span>
+          <span *ngIf="i != 0">
+             • <a [routerLink]="['/artist/', artist.id]" [title]="'Pagina artista per ' + artist.name">{{artist.name}}</a>
+          </span>
+      </ng-container>
+      </h4>
+      <h4 class="mat-h4 album">
+        <a [routerLink]="['/album/', track.album.id]" [title]="'Pagina album per ' + track.album.name">{{track.album.name}}</a>
+        <a href="{{track.spotify}}" title="Ascolta su Spotify" target="_blank" class="spotify">
+          <mat-icon aria-hidden="false" aria-label="Play on Spotify">play_circle_outline</mat-icon>
+        </a>
+      </h4>
+    </div>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="track.video">
+    <iframe width="auto" height="315" [src]="track.video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <div class="lyrics-container" *ngIf="track.lyrics">
+    <p>{{track.lyrics}}</p>
+  </div>
+
+  <div class="lyrics-container" *ngIf="!track.lyrics">
+    <p>Testo non disponibile</p>
+  </div>
+
+</div>
