@@ -20,7 +20,6 @@ import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatSid
   imports : [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     AlbumsModule,
     TracksModule,
@@ -30,7 +29,8 @@ import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatSid
     MatListModule,
     MatDividerModule,
     MatButtonModule,
-    SearchModule
+    SearchModule,
+    AppRoutingModule
   ],
   providers : [],
   bootstrap : [AppComponent]
