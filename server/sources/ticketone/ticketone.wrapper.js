@@ -33,6 +33,7 @@ async function getArtistConcertsAndTickets(artistName) {
         return concerts;
     } catch (err) {
         logger.error(`Error occurred querying TicketOne website - ${err}`);
+        return [];
     }
 
 }
@@ -80,7 +81,7 @@ async function getArtistProfile(artistName) {
 async function getArtistEventSeries(artistProfileUrl) {
 
     if (!artistProfileUrl) {
-        logger.error('Artist profile page must be defined');
+        throw 'Artist profile page must be defined';
     }
 
     let url = encodeURIComponent(`https://www.ticketone.it/${artistProfileUrl}`);
@@ -111,7 +112,7 @@ async function getArtistEventSeries(artistProfileUrl) {
 async function getEventConcerts(artistName, eventUrl) {
 
     if (!artistName || !eventUrl) {
-        logger.error('Artist name and event series page URL must be defined');
+        throw 'Artist name and event series page URL must be defined';
     }
 
     try {
