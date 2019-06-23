@@ -1,0 +1,133 @@
+<mat-spinner *ngIf="status == 'loading'"></mat-spinner>
+
+<h1 *ngIf="status == 'not-found'" class="mat-h1 message">Album non trovato</h1>
+
+<h1 *ngIf="status == 'error'" class="mat-h1 message">Qualcosa è andato storto</h1>
+
+<div class="artist-container mat-elevation-z2" *ngIf="artist">
+
+  <div class="artist-details">
+
+    <div class="cover-container">
+      <img src="{{artist.picture || 'assets/img/placeholder.png'}}" alt="{{artist.name}} cover" />
+    </div>
+
+    <div class="details-container">
+      <h1 class="mat-display-1 name">{{artist.name}}</h1>
+      <h4 class="mat-h4 social">
+        <ng-container *ngIf="artist.facebook">
+          <a href="https://www.facebook.com/{{artist.facebook}}" title="Pagina Facebook" target="_blank" class="facebook">
+            <mat-icon aria-hidden="false" aria-label="Pagina Facebook">play_circle_outline</mat-icon>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="artist.twitter">
+          <a href="https://www.twitter.com/{{artist.twitter}}" title="Pagina Twitter" target="_blank" class="twitter">
+            <mat-icon aria-hidden="false" aria-label="Pagina Twitter">play_circle_outline</mat-icon>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="artist.instagram">
+          <a href="https://www.instagram.com/{{artist.instagram}}" title="Pagina Instagram" target="_blank" class="instagram">
+            <mat-icon aria-hidden="false" aria-label="Pagina Instagram">play_circle_outline</mat-icon>
+          </a>
+        </ng-container>
+      </h4>
+      <h3 class="mat-h3 bio">
+        <span> {{artist.bio}} </span>
+        <br>
+        <a href="{{artist.wikipedia}}" title="Pagina Wikipedia" target="_blank">Pagina Wikipedia</a>
+      </h3>
+    </div>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-tab-group mat-align-tabs="center">
+
+    <mat-tab label="Album">
+
+      <mat-spinner *ngIf="statusAlbums == 'loading'"></mat-spinner>
+
+      <mat-nav-list *ngIf="albums">
+
+        <a mat-list-item *ngFor="let album of albums" routerLink="/album/{{album.id}}">
+
+          <img matListAvatar src="{{album.cover || 'assets/img/placeholder.png'}}" alt="{{album.name}} cover" />
+
+          <h4 matLine>{{album.name}}</h4>
+          <p matLine class="gray">
+            <span >{{album.date | date : 'yyyy'}}</span>
+          </p>
+
+        </a>
+
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="!albums">
+        <h1 class="mat-h1 message">Nessun album disponibile</h1>
+      </mat-nav-list>
+
+    </mat-tab>
+
+    <mat-tab label="News">
+
+      <mat-spinner *ngIf="statusNews == 'loading'"></mat-spinner>
+
+      <mat-nav-list *ngIf="news.news.length !== 0">
+
+        <a mat-list-item *ngFor="let item of news.news" href="{{item.link}}" target="_blank">
+
+          <img matListAvatar src="{{item.picture || 'assets/img/placeholder.png'}}" alt="{{item.title}} cover" />
+
+          <h4 matLine class="mat-h4">{{item.title}}</h4>
+          <p matLine>
+            {{item.excerpt}}
+          </p>
+          <p matLine class="gray">
+            <span>{{item.date | date : 'd/M/yy h:mm a'}}</span>
+          </p>
+          <p matLine class="gray">
+            <span>{{item.source}}</span>
+          </p>
+
+        </a>
+
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="news.news.length === 0">
+        <h1 class="mat-h1 message">Nessuna news disponibile</h1>
+      </mat-nav-list>
+
+    </mat-tab>
+
+    <mat-tab label="Concerti">
+
+      <mat-spinner *ngIf="statusConcerts == 'loading'"></mat-spinner>
+
+      <mat-nav-list *ngIf="concerts.concerts.length !== 0">
+
+        <ng-container *ngFor="let item of concerts.concerts" >
+
+          <mat-icon aria-hidden="false" aria-label="event icon">event</mat-icon>
+
+          <h4 matLine class="mat-h4">{{item.place}}</h4>
+          <p matLine class="gray">
+            <span>{{item.date | date : 'd/M/yy'}}</span>
+          </p>
+
+          <p *ngFor="let ticket of item.tickets">
+            <a mat-button href="{{ticket.link}}" target="_blank">{{ticket.seller}}</a>
+          </p>
+
+        </ng-container>
+
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="concerts.concerts.length === 0">
+        <h1 class="mat-h1 message">Nessun concerto disponibile</h1>
+      </mat-nav-list>
+
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

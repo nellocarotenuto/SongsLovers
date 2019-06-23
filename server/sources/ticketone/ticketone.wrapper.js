@@ -80,7 +80,7 @@ async function getArtistProfile(artistName) {
 async function getArtistEventSeries(artistProfileUrl) {
 
     if (!artistProfileUrl) {
-        throw 'Artist profile page must be defined';
+        logger.error('Artist profile page must be defined');
     }
 
     let url = encodeURIComponent(`https://www.ticketone.it/${artistProfileUrl}`);
@@ -111,7 +111,7 @@ async function getArtistEventSeries(artistProfileUrl) {
 async function getEventConcerts(artistName, eventUrl) {
 
     if (!artistName || !eventUrl) {
-        throw 'Artist name and event series page URL must be defined';
+        logger.error('Artist name and event series page URL must be defined');
     }
 
     try {

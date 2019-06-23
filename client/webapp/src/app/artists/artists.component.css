@@ -1,0 +1,77 @@
+mat-spinner {
+  margin: 20px auto;
+}
+
+h1.message {
+  text-align: center;
+  margin: 20px auto;
+}
+
+div.artist-container {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+div.artist-container > div.artist-details {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+div.artist-container > div.artist-details > div.cover-container > img {
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+}
+
+div.artist-container > div.artist-details > div.details-container {
+  margin-left: 40px;
+}
+
+div.artist-container > div.artist-details > div.details-container > h1.name {
+  margin: 0;
+}
+
+div.artist-container > div.artist-details > div.details-container > a.social {
+  color: #ff4081;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+div.artist-container > div.artist-details > div.details-container > h4.year a.facebook > mat-icon {
+  font-size: 1.5em;
+  width: auto;
+  height: auto;
+}
+
+div.artist-container > div.artist-details > div.details-container > h4.year a.twitter > mat-icon {
+  font-size: 1.5em;
+  width: auto;
+  height: auto;
+}
+
+div.artist-container > div.artist-details > div.details-container > h4.year a.instagram > mat-icon {
+  font-size: 1.5em;
+  width: auto;
+  height: auto;
+}
+
+div.artist-container > div.artist-details > div.details-container > h3.bio {
+  margin-bottom: 0;
+}
+
+div.artist-container > div.artist-details > div.details-container > h3.bio > a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+div.artist-container > mat-tab-group > mat-tab > mat-nav-list {
+  padding: 0;
+}
+
+p.gray {
+  color: #9e9e9e;
+}
