@@ -9,18 +9,18 @@ export class ArtistsService {
   constructor(private http : HttpClient) { }
 
   getArtist(id : String) {
-    return this.http.get(`http://localhost:3000/api/artist/${id}`);
+    return this.http.get(`/api/artist/${id}`);
   }
 
   getAlbums(id : String) {
-    return this.http.get(`http://localhost:3000/api/artist/${id}/albums`);
+    return this.http.get(`/api/artist/${id}/albums`);
   }
 
   getNews(id : String) {
-    return this.http.get(`http://localhost:3000/api/artist/${id}/news`);
+    return this.http.get(`/api/artist/${id}/news`);
   }
 
   getConcerts(id : String) {
-    return this.http.get(`http://localhost:3000/api/artist/${id}/concerts`);
+    return this.http.get(`/api/artist/${id}/concerts`);
   }
 }

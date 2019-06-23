@@ -9,7 +9,7 @@ export class AlbumsService {
   constructor(private http : HttpClient) { }
 
   getAlbum(id : String) {
-    return this.http.get(`http://localhost:3000/api/album/${id}`);
+    return this.http.get(`/api/album/${id}`);
   }
 
 }

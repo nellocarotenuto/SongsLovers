@@ -9,7 +9,7 @@ export class TracksService {
   constructor(private http : HttpClient) { }
 
   getAlbum(id : String) {
-    return this.http.get(`http://localhost:3000/api/track/${id}`);
+    return this.http.get(`/api/track/${id}`);
   }
 
 }
