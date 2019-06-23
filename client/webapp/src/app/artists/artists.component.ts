@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ArtistsService } from "./artists.service";
 import { ActivatedRoute } from "@angular/router";
 import { Title } from "@angular/platform-browser";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-artists',
@@ -11,10 +12,13 @@ import { Title } from "@angular/platform-browser";
 })
 export class ArtistsComponent implements OnInit {
 
-  status = 'loading';
-  statusAlbums = 'loading';
-  statusNews = 'loading';
-  statusConcerts = 'loading';
+  status = {
+    artist : 'loading',
+    albums : 'loading',
+    news : 'loading',
+    concerts : 'loading'
+  };
+
   artist;
   albums;
   news;
@@ -28,56 +32,36 @@ export class ArtistsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.service.getArtist(params.id).subscribe((response) => {
-        this.artist = response;
-        this.status = 'loaded';
-        this.titleService.setTitle(this.artist.name)
-      },
-        (error) => {
-          if (error.status === 404) {
-            this.status = 'not-found';
-            this.titleService.setTitle('Non trovato');
-          } else {
-            this.status = 'error';
-            this.titleService.setTitle('Errore');
+
+      forkJoin(this.service.getArtist(params.id),
+               this.service.getAlbums(params.id),
+               this.service.getNews(params.id),
+               this.service.getConcerts(params.id))
+        .subscribe((response) => {
+          this.artist = response[0];
+
+          if(this.artist.bio) {
+            this.artist.bio = this.artist.bio.length > 280 ? this.artist.bio.substring(0, 280) + '...' : this.artist.bio;
           }
-      });
-      this.service.getAlbums(params.id).subscribe((response) => {
-        this.albums = response;
-        this.statusAlbums = 'loaded';
-      },
-        (error) => {
-          if (error.status === 404) {
-            this.statusAlbums = 'not-found';
-            this.titleService.setTitle('Non trovato');
-          } else {
-            this.statusAlbums = 'error';
-            this.titleService.setTitle('Errore');
-          }
-      });
-      this.service.getNews(params.id).subscribe((response) => {
-          this.news = response;
-          this.statusNews = 'loaded';
+
+          this.status.artist = 'loaded';
+          this.titleService.setTitle(this.artist.name);
+
+          this.albums = response[1];
+          this.status.albums = 'loaded';
+
+          this.news = response[2];
+          this.status.news = 'loaded';
+
+          this.concerts = response[3];
+          this.status.concerts = 'loaded';
         },
         (error) => {
           if (error.status === 404) {
-            this.statusNews = 'not-found';
+            this.status.artist = 'not-found';
             this.titleService.setTitle('Non trovato');
           } else {
-            this.statusNews = 'error';
-            this.titleService.setTitle('Errore');
-          }
-      });
-      this.service.getConcerts(params.id).subscribe((response) => {
-          this.concerts = response;
-          this.statusConcerts = 'loaded';
-        },
-        (error) => {
-          if (error.status === 404) {
-            this.statusConcerts = 'not-found';
-            this.titleService.setTitle('Non trovato');
-          } else {
-            this.statusConcerts = 'error';
+            this.status.artist = 'error';
             this.titleService.setTitle('Errore');
           }
         });
