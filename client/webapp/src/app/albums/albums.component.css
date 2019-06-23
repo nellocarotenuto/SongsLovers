@@ -26,6 +26,7 @@ div.album-container > div.album-details > div.cover-container > img {
   width: 180px;
   height: 180px;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 div.album-container > div.album-details > div.details-container {

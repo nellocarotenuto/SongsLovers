@@ -27,6 +27,10 @@ div.search-container form button {
   margin-left: 20px;
 }
 
+mat-spinner.search {
+  margin: 0 auto;
+}
+
 div.results {
   background: #ffffff;
 }
@@ -47,4 +51,5 @@ div.results a.mat-list-item {
 div.results img.mat-list-icon {
   width: 56px;
   height: 56px;
+  object-fit: cover;
 }

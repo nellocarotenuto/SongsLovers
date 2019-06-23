@@ -23,6 +23,7 @@ div.artist-container > div.artist-details > div.cover-container > img {
   width: 180px;
   height: 180px;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 div.artist-container > div.artist-details > div.details-container {
@@ -33,12 +34,9 @@ div.artist-container > div.artist-details > div.details-container > h1.name {
   margin: 0;
 }
 
-div.artist-container > div.artist-details > div.details-container > a.social {
+div.artist-container > div.artist-details > div.details-container > h4.social a {
   color: #ff4081;
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  margin-left: 4px;
 }
 
 div.artist-container > div.artist-details > div.details-container > h4.year a.facebook > mat-icon {
@@ -68,10 +66,24 @@ div.artist-container > div.artist-details > div.details-container > h3.bio > a {
   text-decoration: none;
 }
 
-div.artist-container > mat-tab-group > mat-tab > mat-nav-list {
+div.artist-container > mat-tab-group mat-nav-list {
   padding: 0;
 }
 
 p.gray {
   color: #9e9e9e;
+}
+
+mat-list.concerts mat-list-item a.mat-button:last-child {
+  margin-left: 6px;
+}
+
+mat-nav-list a.mat-list-item {
+  height: 88px;
+}
+
+mat-nav-list img.mat-list-avatar {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
 }

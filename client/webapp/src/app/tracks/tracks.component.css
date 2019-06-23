@@ -26,6 +26,7 @@ div.track-container > div.track-details > div.cover-container > img {
   width: 180px;
   height: 180px;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 div.track-container > div.track-details > div.details-container {
