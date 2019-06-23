@@ -3,7 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { SearchComponent } from './search.component';
 import { SearchRouting } from "./search.routing";
-import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule} from "@angular/material";
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatProgressSpinnerModule
+} from "@angular/material";
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
@@ -16,7 +23,8 @@ import { FormsModule } from "@angular/forms";
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SearchModule { }

@@ -12,6 +12,8 @@
 
 </div>
 
+<mat-spinner *ngIf="status == 'searching'" class="search"></mat-spinner>
+
 <div class="mat-elevation-z2 results" *ngIf="results">
   <h3 *ngIf="results.length == 0" class="mat-h3">La ricerca non ha prodotto risultati</h3>
 

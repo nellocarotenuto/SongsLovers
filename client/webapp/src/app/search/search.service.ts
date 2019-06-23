@@ -9,7 +9,7 @@ export class SearchService {
   constructor(private http : HttpClient) { }
 
   getResults(query) {
-    return this.http.get(`http://localhost:3000/api/search?s=${encodeURIComponent(query)}`);
+    return this.http.get(`/api/search?s=${encodeURIComponent(query)}`);
   }
 
 }

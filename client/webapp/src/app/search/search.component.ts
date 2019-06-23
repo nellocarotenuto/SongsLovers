@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
 
   query;
   results;
+  status;
 
   constructor(
     private searchService : SearchService,
@@ -22,10 +23,15 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
+    this.results = undefined;
+
     if (this.query) {
+      this.status = 'searching';
+
       this.searchService.getResults(this.query).subscribe(
         (response) => {
           this.results = response['artists'];
+          this.status = 'done';
         },
         (error) => {
         }
