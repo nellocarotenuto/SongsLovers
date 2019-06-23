@@ -72,7 +72,7 @@ async function getArtistNews(artistName) {
 
     if(!artistPage) {
         logger.silly(`No artist page found on Rockol for ${artistName}`);
-        return undefined;
+        return [];
     }
 
     try {
