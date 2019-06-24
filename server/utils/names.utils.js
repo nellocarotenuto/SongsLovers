@@ -5,9 +5,11 @@ const diacritics = require('./diacritics.utils');
 function normalize(string) {
     return diacritics
         .remove(string)
-        .replace(/[,.’'"]/g, '')
+        .replace(/[,.‘’'"”“]/g, '')
         .replace(/[-‐‑⁃−‒–—―]/g, '')
         .replace(/[()]/g, '')
+        .replace(/[®™©℗℠]/g, '')
+        .replace(/[/⧸⁄]/g, '')
         .replace(/\s\s+/g, ' ')
         .trim()
         .toLowerCase();
