@@ -52,7 +52,13 @@ async function fetchTrack(id) {
         title = title.indexOf('(feat.') !== -1 ? title.substring(0, title.indexOf('(feat.')) : title;
         title = title.indexOf('- Radio Edit') !== -1 ? title.substring(0, title.indexOf('- Radio Edit')).trim() : title;
 
-        let geniusInfo = await genius.getSongLyrics(title, spotifyInfo.artists[0].name);
+        let artists = [];
+
+        for (let artist of spotifyInfo.artists) {
+            artists.push(artist.name);
+        }
+
+        let geniusInfo = await genius.getSongLyrics(title, artists);
 
         return {
             id : spotifyInfo.id,

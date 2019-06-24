@@ -54,10 +54,10 @@ async function getArtistSocialInfo(artistName) {
 }
 
 
-async function getSongLyrics(title, artistName) {
+async function getSongLyrics(title, artists) {
 
-    if (!title || !artistName) {
-        throw 'Artist name must be defined';
+    if (!title || !artists || artists.length === 0) {
+        throw 'Artist names must be defined';
     }
 
     let headers = {
@@ -81,13 +81,21 @@ async function getSongLyrics(title, artistName) {
             songs = response.data.response.sections[0].hits;
 
             if (songs.length === 0) {
-                logger.silly(`No song found for "${title}" by "${artistName}"`);
+                logger.silly(`No song found for "${title}" by "${artists[0]}"`);
                 return undefined;
             }
 
             song = songs.find((element) => {
-                return namesUtils.normalize(element.result.title) === namesUtils.normalize(title) &&
-                       namesUtils.normalize(element.result.primary_artist.name) === namesUtils.normalize(artistName);
+                let artistMatch = false;
+
+                for (let artist of artists) {
+                    if (namesUtils.normalize(element.result.primary_artist.name) === namesUtils.normalize(artist)) {
+                        artistMatch = true;
+                        break;
+                    }
+                }
+
+                return namesUtils.normalize(element.result.title) === namesUtils.normalize(title) && artistMatch;
             });
 
             if (song) {
@@ -100,7 +108,7 @@ async function getSongLyrics(title, artistName) {
                 let lyrics = $('div.lyrics p', html).text();
 
                 return {
-                    artist : artistName,
+                    artist : artists,
                     title : title,
                     lyrics : lyrics,
                     video : url
@@ -108,7 +116,7 @@ async function getSongLyrics(title, artistName) {
             }
 
             params.page++;
-        } while (!song);
+        } while (!song && page < 7);
 
         return undefined;
     } catch (err) {
