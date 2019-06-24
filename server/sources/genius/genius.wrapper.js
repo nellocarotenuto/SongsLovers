@@ -116,7 +116,7 @@ async function getSongLyrics(title, artists) {
             }
 
             params.page++;
-        } while (!song && page < 7);
+        } while (!song);
 
         return undefined;
     } catch (err) {
