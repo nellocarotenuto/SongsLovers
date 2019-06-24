@@ -21,9 +21,14 @@
         </a>
       </h4>
       <h3 class="mat-h3 artists">
-        <span *ngFor="let artist of album.artists">
-          <a [routerLink]="['/artist/', artist.id]" [title]="'Pagina artista per ' + artist.name">{{artist.name}}</a>
-        </span>
+        <ng-container *ngFor="let artist of album.artists; index as i">
+          <span *ngIf="i == 0">
+            <a [routerLink]="['/artist/', artist.id]" [title]="'Pagina artista per ' + artist.name">{{artist.name}}</a>
+          </span>
+          <span *ngIf="i != 0">
+             • <a [routerLink]="['/artist/', artist.id]" [title]="'Pagina artista per ' + artist.name">{{artist.name}}</a>
+          </span>
+        </ng-container>
       </h3>
     </div>
 
