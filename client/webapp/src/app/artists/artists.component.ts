@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ArtistsService } from "./artists.service";
 import { ActivatedRoute } from "@angular/router";
 import { Title } from "@angular/platform-browser";
-import {forkJoin} from "rxjs";
+import { concat, forkJoin, Observable} from "rxjs";
 
 @Component({
   selector: 'app-artists',
@@ -32,29 +32,29 @@ export class ArtistsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
+      this.loadArtist(params.id).subscribe(
+        () => {
+          this.loadAlbums(params.id);
+          this.loadNews(params.id);
+          this.loadConcerts(params.id);
+        }
+      )
+    });
+  }
 
-      forkJoin(this.service.getArtist(params.id),
-               this.service.getAlbums(params.id),
-               this.service.getNews(params.id),
-               this.service.getConcerts(params.id))
-        .subscribe((response) => {
-          this.artist = response[0];
+  private loadArtist(id) : Observable<Function> {
+    return new Observable((observer) => {
+      this.service.getArtist(id).subscribe(
+        (response) => {
+          this.artist = response;
 
-          if(this.artist.bio) {
+          if (this.artist.bio) {
             this.artist.bio = this.artist.bio.length > 280 ? this.artist.bio.substring(0, 280) + '...' : this.artist.bio;
           }
 
           this.status.artist = 'loaded';
           this.titleService.setTitle(this.artist.name);
-
-          this.albums = response[1];
-          this.status.albums = 'loaded';
-
-          this.news = response[2];
-          this.status.news = 'loaded';
-
-          this.concerts = response[3];
-          this.status.concerts = 'loaded';
+          observer.next();
         },
         (error) => {
           if (error.status === 404) {
@@ -64,8 +64,36 @@ export class ArtistsComponent implements OnInit {
             this.status.artist = 'error';
             this.titleService.setTitle('Errore');
           }
+          observer.error();
         });
     });
+  }
+
+  private loadAlbums(id) {
+    this.service.getAlbums(id).subscribe(
+      (response) => {
+        this.albums = response;
+        this.status.albums = 'loaded';
+      }
+    );
+  }
+
+  private loadNews(id) {
+    this.service.getNews(id).subscribe(
+      (response) => {
+        this.news = response;
+        this.status.news = 'loaded';
+      }
+    );
+  }
+
+  private loadConcerts(id) {
+    this.service.getConcerts(id).subscribe(
+      (response) => {
+        this.concerts = response;
+        this.status.concerts = 'loaded';
+      }
+    )
   }
 
 }

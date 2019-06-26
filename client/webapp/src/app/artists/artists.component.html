@@ -26,7 +26,7 @@
         </ng-container>
       </h4>
       <h3 class="mat-h3 bio" *ngIf="artist.bio">
-        <p>{{artist.bio}} </p>
+        <span>{{artist.bio}} </span>
         <a href="{{artist.wikipedia}}" title="Wikipedia" target="_blank">Wikipedia</a>
       </h3>
     </div>
@@ -41,7 +41,7 @@
 
       <mat-spinner *ngIf="status.albums == 'loading'"></mat-spinner>
 
-      <mat-nav-list *ngIf="albums">
+      <mat-nav-list *ngIf="status.albums == 'loaded'">
 
         <a mat-list-item *ngFor="let album of albums" routerLink="/album/{{album.id}}">
 
@@ -56,7 +56,7 @@
 
       </mat-nav-list>
 
-      <mat-nav-list *ngIf="!albums">
+      <mat-nav-list *ngIf="status.albums == 'loaded' && albums.length == 0">
         <h1 class="mat-h1 message">Nessun album disponibile</h1>
       </mat-nav-list>
 
@@ -66,11 +66,11 @@
 
       <mat-spinner *ngIf="status.news == 'loading'"></mat-spinner>
 
-      <mat-nav-list *ngIf="news.news.length == 0">
+      <mat-nav-list *ngIf="status.news == 'loaded' && news.news.length == 0">
         <h1 class="mat-h1 message">Nessuna notizia disponibile</h1>
       </mat-nav-list>
 
-      <mat-nav-list *ngIf="news.news.length != 0">
+      <mat-nav-list *ngIf="status.news == 'loaded' && news.news.length != 0">
 
         <a mat-list-item *ngFor="let item of news.news" href="{{item.link}}" target="_blank">
 
@@ -95,7 +95,7 @@
 
       <mat-spinner *ngIf="status.concerts == 'loading'"></mat-spinner>
 
-      <mat-list *ngIf="concerts.concerts.length !== 0" class="concerts">
+      <mat-list *ngIf="status.concerts == 'loaded' && concerts.concerts.length !== 0" class="concerts">
 
         <mat-list-item *ngFor="let item of concerts.concerts" >
 
@@ -114,7 +114,7 @@
 
       </mat-list>
 
-      <mat-nav-list *ngIf="concerts.concerts.length === 0">
+      <mat-nav-list *ngIf="status.concerts == 'loaded' && concerts.concerts.length === 0">
         <h1 class="mat-h1 message">Nessun concerto disponibile</h1>
       </mat-nav-list>
 
